@@ -1,0 +1,45 @@
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.15'
+    }
+}
+
+ext {
+    defaultVersionName = "1.0.0" // Remplacez "1.0.0" par la version de votre choix
+    defaultMinSdkVersion = 21 // Remplacez 21 par la version minimale souhaitée
+    buildToolsVersion = "30.0.2" // Remplacez "30.0.2" par la version des outils de build souhaitée
+    compileSdkVersion = 33 // Remplacez 30 par la version de la plate-forme de compilation souhaitée
+    ndkVersion = "21.4.7075529" // Remplacez "21.4.7075529" par la version du NDK souhaitée
+    defaultVersionName1 = "1.1.0" // Remplacez "1.1.0" par la version de votre choix
+
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+
+dependencies {
+}
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
